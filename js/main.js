@@ -1,8 +1,8 @@
 var ourRequest = new XMLHttpRequest();
 var catMap = new Map();
-var urlRX = /(v=)(...........)/
+var urlRX = /(v=)(...........)/ //this is the regex that finds the v=etc code
 
-
+//necessary
 catMap.set("1", "Film & Animation");
 catMap.set("10", "Music");
 catMap.set("15", "Pets & Animals");
@@ -39,7 +39,7 @@ function getID(){
     var url = document.getElementById("youtubeURL").value;
     
     console.log("Passing " + url);
-    var urlKey = urlRX.exec(url)[2];
+    var urlKey = urlRX.exec(url)[2];//group that matches the urlKey for ourRequests.open()
     console.log("KEY: " + urlKey);
 
     ourRequest.open('GET', 'https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + urlKey + '&key=AIzaSyC59K1CO0RwZ-WsANfM4H8bqIXRtFdPcEI');
@@ -47,7 +47,7 @@ function getID(){
     ourRequest.onload = function() {
         var ourData = JSON.parse(ourRequest.responseText);
         var catID = ourData['items'][0]['snippet']['categoryId'];
-        cat = catMap.get(catID);
+        cat = catMap.get(catID); //uses map to get category
         console.log(cat);
         document.getElementById("category").textContent = "Category: " + cat;
     
