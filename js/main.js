@@ -1,6 +1,7 @@
 var ourRequest = new XMLHttpRequest();
 var catMap = new Map();
 var urlRX = /(v=)(...........)/ //this is the regex that finds the v=etc code
+var path = window.location.pathname; //hopefully the url
 
 //necessary
 catMap.set("1", "Film & Animation");
@@ -36,7 +37,8 @@ catMap.set("43", "Shows");
 catMap.set("44", "Trailers");
 
 function getID(){
-    var url = document.getElementById("youtubeURL").value;
+    console.log("url: " + path);
+    var url = document.getElementById("youtubeURL").value; //needs to change for plugin
     
     console.log("Passing " + url);
     var urlKey = urlRX.exec(url)[2];//group that matches the urlKey for ourRequests.open()
